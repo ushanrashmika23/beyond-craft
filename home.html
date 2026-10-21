@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeyondCraft Tattoo — London, UK | Raw Artist Archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #131110;
+            --paper: #ECE7DC;
+            --paper-dim: #E2DCCE;
+            --crimson: #7C2222;
+            --crimson-dark: #591515;
+            --brass: #A07A3B;
+            --charcoal: #4B463F;
+            --off-white: #F7F4EC;
+            --line-dark: rgba(247, 244, 236, 0.18);
+            --line-brass: rgba(160, 122, 59, 0.45);
+            --overlay: rgba(19, 17, 16, 0.72);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .serif-italic {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .label {
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .label.on-dark {
+            color: rgba(247, 244, 236, 0.6);
+        }
+
+        .label.crimson {
+            color: var(--crimson);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+
+        /* ============ NAV ============ */
+        nav.site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 48px;
+            background: rgba(19, 17, 16, 0.82);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--line-dark);
+            transition: background 300ms ease;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--off-white);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-center {
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(247, 244, 236, 0.75);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(247, 244, 236, 0.85);
+        }
+
+        .nav-links a {
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: var(--crimson);
+            transition: width 250ms ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            width: 26px;
+        }
+
+        .nav-burger span {
+            display: block;
+            height: 1px;
+            width: 100%;
+            background: var(--off-white);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--ink);
+            z-index: 1500;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 26px;
+            padding: 48px;
+            transform: translateY(-100%);
+            transition: transform 400ms ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: var(--off-white);
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 26px;
+            right: 26px;
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            color: var(--off-white);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 640px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--ink);
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 60px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 7.5vw, 115px);
+            line-height: 0.88;
+            color: var(--off-white);
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-sub {
+            margin-top: 22px;
+            font-size: 13px;
+            letter-spacing: 0.3em;
+            color: var(--crimson);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .hero-vertical {
+            position: absolute;
+            left: 24px;
+            bottom: 40px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            color: rgba(247, 244, 236, 0.45);
+            text-transform: uppercase;
+        }
+
+        .hero-right {
+            position: relative;
+            margin: 14px 14px 14px 0;
+            overflow: hidden;
+            background: var(--charcoal);
+        }
+
+        .hero-right img {
+            filter: grayscale(1) contrast(1.15) brightness(0.9);
+        }
+
+        .hero-label {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 16px;
+            color: var(--off-white);
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(247, 244, 236, 0.4);
+            padding: 5px 12px;
+        }
+
+        .hero-explore {
+            position: absolute;
+            bottom: 34px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--off-white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: 1px solid rgba(247, 244, 236, 0.4);
+            background: rgba(19, 17, 16, 0.4);
+            transition: all 300ms ease;
+        }
+
+        .hero-explore:hover {
+            border-color: var(--crimson);
+            color: var(--crimson);
+            letter-spacing: 0.28em;
+        }
+
+        /* ============ ARCHIVE ============ */
+        .archive {
+            background: var(--paper);
+            padding: 140px 0 100px;
+        }
+
+        .archive-header {
+            padding: 0 48px;
+            margin-bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .archive-header h2 {
+            font-size: clamp(48px, 7vw, 110px);
+            text-transform: uppercase;
+            line-height: 0.92;
+        }
+
+        .archive-list {
+            display: flex;
+            flex-direction: column;
+            gap: 130px;
+        }
+
+        .archive-item {
+            display: flex;
+            flex-direction: column;
+            padding: 0 48px;
+        }
+
+        .archive-item.layout-a {
+            align-items: flex-start;
+        }
+
+        .archive-item.layout-b {
+            align-items: flex-end;
+        }
+
+        .archive-item.layout-c {
+            align-items: center;
+        }
+
+        .archive-image {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--charcoal);
+        }
+
+        .layout-a .archive-image {
+            width: 72%;
+            height: 78vh;
+        }
+
+        .layout-b .archive-image {
+            width: 52%;
+            height: 64vh;
+        }
+
+        .layout-c .archive-image {
+            width: 60%;
+            height: 70vh;
+        }
+
+        .archive-image img {
+            transition: transform 500ms ease, filter 500ms ease;
+            filter: grayscale(1) contrast(1.1) brightness(0.95);
+        }
+
+        .archive-image:hover img,
+        .archive-image.show-overlay img {
+            transform: scale(1.06);
+        }
+
+        .archive-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--overlay);
+            opacity: 0;
+            transition: opacity 400ms ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 34px;
+        }
+
+        .archive-image:hover .archive-overlay,
+        .archive-image.show-overlay .archive-overlay {
+            opacity: 1;
+        }
+
+        .overlay-marker {
+            width: 2px;
+            height: 36px;
+            background: var(--crimson);
+            margin-bottom: 16px;
+        }
+
+        .overlay-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(247, 244, 236, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .archive-overlay h3 {
+            font-size: clamp(26px, 3vw, 40px);
+            color: var(--off-white);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .archive-overlay p {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(247, 244, 236, 0.65);
+            margin-bottom: 3px;
+        }
+
+        .overlay-view {
+            margin-top: 18px;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--off-white);
+            border-bottom: 1px solid var(--crimson);
+            padding-bottom: 4px;
+            width: fit-content;
+        }
+
+        .archive-meta {
+            margin-top: 18px;
+            display: flex;
+            gap: 24px;
+            align-items: baseline;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+        }
+
+        .archive-meta span:first-child {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--brass);
+            letter-spacing: 0;
+        }
+
+        .archive-meta span:nth-child(2) {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .archive-full {
+            position: relative;
+            width: 100%;
+            height: 92vh;
+            margin: 20px 0;
+            overflow: hidden;
+            background: var(--charcoal);
+        }
+
+        .archive-full img {
+            filter: grayscale(1) contrast(1.15) brightness(0.92);
+        }
+
+        .archive-full-meta {
+            position: absolute;
+            bottom: 28px;
+            left: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            color: var(--off-white);
+        }
+
+        .archive-full-meta span {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        .archive-full-meta span:first-child {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 18px;
+            opacity: 1;
+        }
+
+        /* ============ APPROACH ============ */
+        .approach {
+            background: var(--paper-dim);
+            padding: 150px 48px;
+        }
+
+        .approach-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .approach h2 {
+            font-size: clamp(42px, 7vw, 100px);
+            text-transform: uppercase;
+            line-height: 0.95;
+            max-width: 900px;
+        }
+
+        .approach h2 em {
+            font-style: italic;
+            color: var(--crimson);
+        }
+
+        .approach p.desc {
+            max-width: 460px;
+            margin-top: 36px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+
+        .principles {
+            display: flex;
+            gap: 80px;
+            margin-top: 90px;
+            flex-wrap: wrap;
+        }
+
+        .principle {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border-top: 1px solid var(--line-brass);
+            padding-top: 18px;
+            min-width: 140px;
+        }
+
+        .principle .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: var(--brass);
+        }
+
+        .principle .name {
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--ink);
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .principle .name::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 26px;
+            height: 2px;
+            background: var(--crimson);
+        }
+
+        /* ============ STYLES ============ */
+        .styles-section {
+            background: var(--ink);
+            padding: 150px 48px;
+            color: var(--off-white);
+        }
+
+        .styles-wrap {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .styles-list li {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 5vw, 70px);
+            text-transform: uppercase;
+            padding: 14px 0;
+            color: rgba(247, 244, 236, 0.35);
+            cursor: pointer;
+            transition: color 300ms ease, padding-left 300ms ease;
+            border-bottom: 1px solid var(--line-dark);
+        }
+
+        .styles-list li.active {
+            color: var(--crimson);
+            padding-left: 16px;
+        }
+
+        .styles-preview {
+            position: relative;
+            width: 100%;
+            height: 520px;
+            overflow: hidden;
+            background: var(--charcoal);
+        }
+
+        .styles-preview img {
+            filter: grayscale(1) contrast(1.15) brightness(0.9);
+            opacity: 0.9;
+            transition: opacity 400ms ease;
+        }
+
+        /* ============ ARTIST ============ */
+        .artist-section {
+            background: var(--ink);
+            color: var(--off-white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        .artist-photo {
+            position: relative;
+            overflow: hidden;
+            background: var(--charcoal);
+        }
+
+        .artist-photo img {
+            filter: grayscale(1) contrast(1.1) brightness(0.9);
+        }
+
+        .artist-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 70px 70px;
+        }
+
+        .artist-content .label {
+            margin-bottom: 20px;
+        }
+
+        .artist-content h2 {
+            font-size: clamp(38px, 5vw, 70px);
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 26px;
+        }
+
+        .artist-content p.intro {
+            max-width: 440px;
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(247, 244, 236, 0.7);
+            margin-bottom: 44px;
+        }
+
+        .artist-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .artist-details div {
+            padding: 14px 0;
+            border-top: 1px solid var(--line-brass);
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(247, 244, 236, 0.7);
+        }
+
+        .artist-details div:last-child {
+            border-bottom: 1px solid var(--line-brass);
+        }
+
+        /* ============ REVIEWS ============ */
+        .reviews {
+            background: var(--paper);
+            padding: 150px 48px;
+            text-align: center;
+        }
+
+        .reviews .label {
+            margin-bottom: 40px;
+        }
+
+        .review-stars {
+            color: var(--brass);
+            font-size: 20px;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+        }
+
+        .review-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(24px, 3.4vw, 42px);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.4;
+            color: var(--ink);
+            transition: opacity 300ms ease;
+        }
+
+        .review-name {
+            margin-top: 34px;
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--ink);
+            transition: opacity 300ms ease;
+        }
+
+        .review-source {
+            margin-top: 4px;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+        }
+
+        .review-nav {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .review-count {
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            color: var(--charcoal);
+        }
+
+        .review-next {
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--crimson);
+            padding-bottom: 4px;
+            color: var(--crimson);
+            font-weight: 600;
+        }
+
+        /* ============ CONTACT ============ */
+        .contact {
+            background: var(--ink);
+            color: var(--off-white);
+            padding: 150px 48px 100px;
+        }
+
+        .contact-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: clamp(46px, 8vw, 120px);
+            text-transform: uppercase;
+            line-height: 0.92;
+        }
+
+        .contact-sub {
+            margin-top: 26px;
+            font-size: 14px;
+            color: rgba(247, 244, 236, 0.6);
+            letter-spacing: 0.05em;
+        }
+
+        .contact-cta {
+            margin-top: 44px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--off-white);
+            border: 1px solid var(--brass);
+            padding: 16px 30px;
+            transition: all 300ms ease;
+        }
+
+        .contact-cta:hover {
+            background: var(--crimson);
+            border-color: var(--crimson);
+        }
+
+        .contact-form {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 600ms ease;
+            margin-top: 0;
+        }
+
+        .contact-form.open {
+            max-height: 900px;
+            margin-top: 70px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px 60px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-bottom: 1px solid var(--line-dark);
+            padding-bottom: 14px;
+        }
+
+        .field.full {
+            grid-column: 1/-1;
+        }
+
+        .field label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(247, 244, 236, 0.5);
+        }
+
+        .field input,
+        .field textarea {
+            background: transparent;
+            border: none;
+            color: var(--off-white);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            outline: none;
+            resize: none;
+            width: 100%;
+        }
+
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: rgba(247, 244, 236, 0.3);
+        }
+
+        .submit-btn {
+            margin-top: 50px;
+            font-size: 14px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 18px 40px;
+            background: var(--crimson);
+            color: var(--off-white);
+            transition: background 300ms ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--crimson-dark);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--paper-dim);
+            padding: 80px 48px 30px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 40px;
+            border-bottom: 1px solid var(--line-brass);
+            padding-bottom: 50px;
+        }
+
+        .footer-top h2 {
+            font-size: clamp(40px, 6vw, 80px);
+            text-transform: uppercase;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 34px;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 24px;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 900;
+            background: var(--crimson);
+            color: var(--off-white);
+            text-align: center;
+            padding: 16px;
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media(max-width:900px) {
+
+            .nav-center,
+            .nav-links {
+                display: none;
+            }
+
+            .nav-burger {
+                display: flex;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .hero-left {
+                padding: 110px 24px 60px;
+                min-height: 60vh;
+            }
+
+            .hero-right {
+                margin: 0 14px 14px;
+                height: 60vh;
+            }
+
+            .hero-vertical {
+                display: none;
+            }
+
+            .archive-item.layout-a .archive-image,
+            .archive-item.layout-b .archive-image,
+            .archive-item.layout-c .archive-image {
+                width: 100%;
+                height: 60vh;
+            }
+
+            .archive-item {
+                align-items: center !important;
+                padding: 0 20px;
+            }
+
+            .styles-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .styles-preview {
+                height: 320px;
+                order: -1;
+            }
+
+            .artist-section {
+                grid-template-columns: 1fr;
+            }
+
+            .artist-photo {
+                height: 60vh;
+            }
+
+            .artist-content {
+                padding: 60px 26px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .container,
+            .archive-header,
+            .approach,
+            .styles-section,
+            .contact,
+            footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .mobile-cta {
+                display: block;
+            }
+
+            body {
+                padding-bottom: 54px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="site-nav">
+        <div class="nav-logo">BC</div>
+        <div class="nav-center">BEYONDCRAFT TATTOO</div>
+        <div class="nav-links">
+            <a href="#work">WORK</a>
+            <a href="#about">ABOUT</a>
+            <a href="#reviews">REVIEWS</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+        <button class="nav-burger" id="burgerBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-close" id="closeMenu">CLOSE ✕</div>
+        <a href="#work" class="mobile-link">WORK</a>
+        <a href="#about" class="mobile-link">ABOUT</a>
+        <a href="#reviews" class="mobile-link">REVIEWS</a>
+        <a href="#contact" class="mobile-link">CONTACT</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-left">
+            <div class="hero-vertical">LONDON / UNITED KINGDOM</div>
+            <h1 class="hero-title">BEYOND<br>CRAFT<br>TATTOO</h1>
+            <div class="hero-sub">TATTOO STUDIO</div>
+        </div>
+        <div class="hero-right">
+            <img id="heroImg" alt="Tattoo work" src="">
+            <span class="hero-label">BC / 001</span>
+        </div>
+        <a href="#work" class="hero-explore">EXPLORE WORK <span>↓</span></a>
+    </section>
+
+    <!-- ARCHIVE -->
+    <section class="archive" id="work">
+        <div class="archive-header">
+            <span class="label">ARCHIVE / 2026</span>
+            <h2>RECENT WORK</h2>
+        </div>
+
+        <div class="archive-list">
+
+            <article class="archive-item layout-a">
+                <div class="archive-image" data-id="1">
+                    <img class="js-archive-img" data-key="p1" alt="Black and grey sleeve" src="">
+                    <div class="archive-overlay">
+                        <div class="overlay-marker"></div>
+                        <span class="overlay-label">PROJECT 001</span>
+                        <h3>BLACK & GREY SLEEVE</h3>
+                        <p>BLACK & GREY</p>
+                        <p>CUSTOM WORK</p>
+                        <span class="overlay-view">VIEW →</span>
+                    </div>
+                </div>
+                <div class="archive-meta">
+                    <span>001</span><span>BLACK & GREY SLEEVE</span><span>2026</span><span>CUSTOM</span>
+                </div>
+            </article>
+
+            <article class="archive-item layout-b">
+                <div class="archive-image" data-id="2">
+                    <img class="js-archive-img" data-key="p2" alt="Fine line piece" src="">
+                    <div class="archive-overlay">
+                        <div class="overlay-marker"></div>
+                        <span class="overlay-label">PROJECT 002</span>
+                        <h3>FINE LINE PIECE</h3>
+                        <p>FINE LINE</p>
+                        <p>CUSTOM WORK</p>
+                        <span class="overlay-view">VIEW →</span>
+                    </div>
+                </div>
+                <div class="archive-meta">
+                    <span>002</span><span>FINE LINE PIECE</span><span>2026</span><span>CUSTOM</span>
+                </div>
+            </article>
+
+            <article class="archive-item layout-c">
+                <div class="archive-image" data-id="3">
+                    <img class="js-archive-img" data-key="p3" alt="Traditional flash" src="">
+                    <div class="archive-overlay">
+                        <div class="overlay-marker"></div>
+                        <span class="overlay-label">PROJECT 003</span>
+                        <h3>TRADITIONAL FLASH</h3>
+                        <p>TRADITIONAL</p>
+                        <p>STUDIO PIECE</p>
+                        <span class="overlay-view">VIEW →</span>
+                    </div>
+                </div>
+                <div class="archive-meta">
+                    <span>003</span><span>TRADITIONAL FLASH</span><span>2026</span><span>FLASH</span>
+                </div>
+            </article>
+
+            <article class="archive-item layout-a">
+                <div class="archive-image" data-id="4">
+                    <img class="js-archive-img" data-key="p4" alt="Custom chest piece" src="">
+                    <div class="archive-overlay">
+                        <div class="overlay-marker"></div>
+                        <span class="overlay-label">PROJECT 004</span>
+                        <h3>CUSTOM CHEST PIECE</h3>
+                        <p>BLACK & GREY</p>
+                        <p>CUSTOM WORK</p>
+                        <span class="overlay-view">VIEW →</span>
+                    </div>
+                </div>
+                <div class="archive-meta">
+                    <span>004</span><span>CUSTOM CHEST PIECE</span><span>2026</span><span>CUSTOM</span>
+                </div>
+            </article>
+
+            <!-- FULL WIDTH -->
+            <div class="archive-full">
+                <img class="js-archive-img" data-key="p5" alt="Full width tattoo artwork" src="">
+                <div class="archive-full-meta">
+                    <span>BC / 005</span>
+                    <span>CUSTOM PIECE</span>
+                    <span>LONDON</span>
+                </div>
+            </div>
+
+            <article class="archive-item layout-b">
+                <div class="archive-image" data-id="6">
+                    <img class="js-archive-img" data-key="p6" alt="Geometric line work" src="">
+                    <div class="archive-overlay">
+                        <div class="overlay-marker"></div>
+                        <span class="overlay-label">PROJECT 006</span>
+                        <h3>GEOMETRIC LINE WORK</h3>
+                        <p>FINE LINE</p>
+                        <p>CUSTOM WORK</p>
+                        <span class="overlay-view">VIEW →</span>
+                    </div>
+                </div>
+                <div class="archive-meta">
+                    <span>006</span><span>GEOMETRIC LINE WORK</span><span>2026</span><span>CUSTOM</span>
+                </div>
+            </article>
+
+            <article class="archive-item layout-c">
+                <div class="archive-image" data-id="7">
+                    <img class="js-archive-img" data-key="p7" alt="Portrait realism" src="">
+                    <div class="archive-overlay">
+                        <div class="overlay-marker"></div>
+                        <span class="overlay-label">PROJECT 007</span>
+                        <h3>PORTRAIT REALISM</h3>
+                        <p>BLACK & GREY</p>
+                        <p>CUSTOM WORK</p>
+                        <span class="overlay-view">VIEW →</span>
+                    </div>
+                </div>
+                <div class="archive-meta">
+                    <span>007</span><span>PORTRAIT REALISM</span><span>2026</span><span>CUSTOM</span>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="approach">
+        <div class="approach-inner">
+            <h2>NO TWO<br>PIECES ARE<br><em>THE SAME.</em></h2>
+            <p class="desc">Every piece begins with an idea. We work with each client to develop something personal,
+                considered and built around them.</p>
+            <div class="principles">
+                <div class="principle">
+                    <span class="num">01</span>
+                    <span class="name">CUSTOM</span>
+                </div>
+                <div class="principle">
+                    <span class="num">02</span>
+                    <span class="name">DETAILED</span>
+                </div>
+                <div class="principle">
+                    <span class="num">03</span>
+                    <span class="name">PERSONAL</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STYLES -->
+    <section class="styles-section">
+        <span class="label on-dark">WHAT WE DO</span>
+        <div class="styles-wrap">
+            <ul class="styles-list" id="stylesList">
+                <li data-key="s1" class="active">BLACK & GREY</li>
+                <li data-key="s2">FINE LINE</li>
+                <li data-key="s3">TRADITIONAL</li>
+                <li data-key="s4">CUSTOM</li>
+                <li data-key="s5">SLEEVE WORK</li>
+            </ul>
+            <div class="styles-preview">
+                <img id="stylePreviewImg" alt="Style preview" src="">
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTIST -->
+    <section class="artist-section" id="about">
+        <div class="artist-photo">
+            <img id="artistImg" alt="Artist at work" src="">
+        </div>
+        <div class="artist-content">
+            <span class="label on-dark">THE ARTIST</span>
+            <h2>CRAFTED BY HAND.</h2>
+            <p class="intro">Every session is built on trust, patience and precision. From first sketch to final line,
+                the work is done slowly, deliberately, and entirely by hand — no shortcuts, no templates.</p>
+            <div class="artist-details">
+                <div>WOOLWICH</div>
+                <div>LONDON</div>
+                <div>CUSTOM TATTOO</div>
+                <div>BY APPOINTMENT</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews" id="reviews">
+        <span class="label">WORDS FROM CLIENTS</span>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-quote" id="reviewQuote">"Absolutely love the result. The attention to detail was incredible."
+        </p>
+        <div class="review-name" id="reviewName">SARAH M.</div>
+        <div class="review-source">GOOGLE REVIEW</div>
+        <div class="review-nav">
+            <span class="review-count" id="reviewCount">01 / 04</span>
+            <button class="review-next" id="reviewNext">NEXT →</button>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <h2>LET'S MAKE<br>SOMETHING<br>PERMANENT.</h2>
+            <p class="contact-sub">42 Powis Street, Woolwich, London SE18 6LQ, UK</p>
+
+            <div class="contact-form" id="contactForm" style="display: block; opacity: 1; transform: translateY(0); margin-top: 2rem;">
+                <div class="map-container" style="width: 100%; height: 100%; min-height: 400px; overflow: hidden; background: var(--grey);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.582877967926!2d0.0634693769974241!3d51.48965807180809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a8fa3d339d2f%3A0xd64ad6e33d711b74!2sPowis%20St%2C%20London%20SE18%206LQ%2C%20UK!5e0!3m2!1sen!2suk!4v1714413123456!5m2!1sen!2suk" width="100%" height="100%" style="border:0; min-height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <h2>BEYONDCRAFT TATTOO</h2>
+            <div class="footer-links">
+                <a href="#">INSTAGRAM</a>
+                <a href="#work">WORK</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>42 POWIS ST, WOOLWICH, LONDON SE18 6LQ</span>
+            <span>+44 000 000 0000</span>
+            <span>BC / EST. 2026</span>
+        </div>
+    </footer>
+
+    <div class="mobile-cta"><a href="#contact">ENQUIRE →</a></div>
+
+    <script>
+        /* ================================================================
+           IMAGE CONFIG
+           ------------------------------------------------------------
+           These are real photographs served from Unsplash's direct CDN
+           (images.unsplash.com) — not AI-generated, not generic stock
+           card templates. They're used here as stand-ins for the studio's
+           own portfolio photography.
+      
+           TO GO LIVE: replace each URL below with a real photo of
+           BeyondCraft Tattoo's actual work (from Instagram, past
+           client sessions, or a proper photoshoot). Every image in the
+           page pulls from this single object, so updating here updates
+           the whole site.
+        ================================================================ */
+        const IMAGES = {
+            hero: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=1200&q=80&auto=format&fit=crop",
+            p1: "https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=1200&q=80&auto=format&fit=crop",
+            p2: "https://images.unsplash.com/photo-1590246814883-57c511e76523?w=1000&q=80&auto=format&fit=crop",
+            p3: "https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=1100&q=80&auto=format&fit=crop",
+            p4: "https://images.unsplash.com/photo-1552693673-1bf958298935?w=1200&q=80&auto=format&fit=crop",
+            p5: "https://images.unsplash.com/photo-1611195974226-a6a9be9dd763?w=1800&q=80&auto=format&fit=crop",
+            p6: "https://images.unsplash.com/photo-1621607511662-1eb5f2952dcf?w=1000&q=80&auto=format&fit=crop",
+            p7: "https://images.unsplash.com/photo-1601049676869-702ea24cfd58?w=1100&q=80&auto=format&fit=crop",
+            artist: "https://images.unsplash.com/photo-1590246814883-57c511e76523?w=1000&q=80&auto=format&fit=crop",
+            s1: "https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=900&q=80&auto=format&fit=crop",
+            s2: "https://images.unsplash.com/photo-1590246814883-57c511e76523?w=900&q=80&auto=format&fit=crop",
+            s3: "https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=900&q=80&auto=format&fit=crop",
+            s4: "https://images.unsplash.com/photo-1552693673-1bf958298935?w=900&q=80&auto=format&fit=crop",
+            s5: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=900&q=80&auto=format&fit=crop"
+        };
+
+        // Fallback chain in case any single Unsplash URL 404s
+        const FALLBACK = "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=1200&q=80&auto=format&fit=crop";
+
+        function setImgWithFallback(imgEl, url) {
+            imgEl.src = url;
+            imgEl.onerror = () => {
+                if (imgEl.src !== FALLBACK) imgEl.src = FALLBACK;
+            };
+        }
+
+        // Assign hero image
+        setImgWithFallback(document.getElementById('heroImg'), IMAGES.hero);
+
+        // Assign archive images
+        document.querySelectorAll('.js-archive-img').forEach(img => {
+            const key = img.getAttribute('data-key');
+            setImgWithFallback(img, IMAGES[key]);
+        });
+
+        // Assign artist image
+        setImgWithFallback(document.getElementById('artistImg'), IMAGES.artist);
+
+        // Assign initial style preview
+        const stylePreviewImg = document.getElementById('stylePreviewImg');
+        setImgWithFallback(stylePreviewImg, IMAGES.s1);
+
+        /* ================= NAV ================= */
+        const nav = document.querySelector('.site-nav');
+        window.addEventListener('scroll', () => {
+            nav.style.background = window.scrollY > 40 ? 'rgba(19,17,16,0.95)' : 'rgba(19,17,16,0.82)';
+        });
+
+        const burgerBtn = document.getElementById('burgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        burgerBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+
+        /* ================= ARCHIVE TAP-TO-REVEAL (mobile) ================= */
+        const archiveImages = document.querySelectorAll('.archive-image');
+        function isMobile() { return window.innerWidth <= 900; }
+        archiveImages.forEach(img => {
+            img.addEventListener('click', () => {
+                if (isMobile()) {
+                    archiveImages.forEach(other => { if (other !== img) other.classList.remove('show-overlay'); });
+                    img.classList.toggle('show-overlay');
+                }
+            });
+        });
+
+        /* ================= STYLES SELECTOR ================= */
+        const styleItems = document.querySelectorAll('.styles-list li');
+        styleItems.forEach(item => {
+            const activate = () => {
+                styleItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                const key = item.getAttribute('data-key');
+                stylePreviewImg.style.opacity = 0;
+                setTimeout(() => {
+                    setImgWithFallback(stylePreviewImg, IMAGES[key]);
+                    stylePreviewImg.style.opacity = 0.9;
+                }, 200);
+            };
+            item.addEventListener('mouseenter', activate);
+            item.addEventListener('click', activate);
+        });
+
+        /* ================= REVIEWS CAROUSEL ================= */
+        const reviews = [
+            { quote: '"Absolutely love the result. The attention to detail was incredible."', name: 'SARAH M.' },
+            { quote: '"Made me feel completely comfortable from start to finish. True craftsmanship."', name: 'JAMES O.' },
+            { quote: '"The line work is unbelievably clean. Worth every session."', name: 'PRIYA K.' },
+            { quote: '"An artist in every sense. My sleeve tells a story I could not have imagined myself."', name: 'DANIEL R.' }
+        ];
+        let reviewIndex = 0;
+        const reviewQuote = document.getElementById('reviewQuote');
+        const reviewName = document.getElementById('reviewName');
+        const reviewCount = document.getElementById('reviewCount');
+        document.getElementById('reviewNext').addEventListener('click', () => {
+            reviewIndex = (reviewIndex + 1) % reviews.length;
+            reviewQuote.style.opacity = 0;
+            reviewName.style.opacity = 0;
+            setTimeout(() => {
+                reviewQuote.textContent = reviews[reviewIndex].quote;
+                reviewName.textContent = reviews[reviewIndex].name;
+                reviewCount.textContent = String(reviewIndex + 1).padStart(2, '0') + ' / ' + String(reviews.length).padStart(2, '0');
+                reviewQuote.style.opacity = 1;
+                reviewName.style.opacity = 1;
+            }, 200);
+        });
+
+        /* ================= CONTACT FORM TOGGLE ================= */
+        const startBtn = document.getElementById('startEnquiry');
+        const contactForm = document.getElementById('contactForm');
+        startBtn.addEventListener('click', () => {
+            contactForm.classList.toggle('open');
+        });
+    </script>
+
+</body>
+
+</html>
